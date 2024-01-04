@@ -16,8 +16,6 @@ However, named exports are detected statically by [cjs-module-lexer](https://git
 This repository introduces one such case.
 
 ```console
-
-```console
 $ node -v
 v21.4.0
 
