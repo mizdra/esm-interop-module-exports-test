@@ -1,3 +1,9 @@
+
+## Problem status
+
+解決済み。
+
+## Problem details
 `module.exports = ` の右側に書く式によって、export される値が変わることの確認。
 
 `{ default: { math: ..., string: ... }, math: ..., string: ... }` というオブジェクトが export されることを期待していて、ケース1では期待通りになるが、ケース2, 3 は期待通りにならない。
@@ -49,3 +55,9 @@ $ node src/main.cjs
   string: { join: [Function: join], capitalize: [Function: capitalize] }
 }
 ```
+
+## Solution
+
+Node.js の仕様だということがわかりました。
+
+- https://twitter.com/mizdra/status/1742911589517516924
