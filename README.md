@@ -11,7 +11,7 @@ The original CJS does not support named exports. Therefore, it is not possible t
 
 - https://nodejs.org/api/esm.html#commonjs-namespaces
 
-However, named exports are detected statically by [cjs-module-lexer](https://github.com/mizdra/esm-interop-module-exports-test). Therefore, some cases that cannot be detected by cjs-module-lexer will be missing named exports.
+However, named exports are detected statically by [cjs-module-lexer](https://github.com/nodejs/cjs-module-lexer). Therefore, some cases that cannot be detected by cjs-module-lexer will be missing named exports.
 
 This repository introduces one such case.
 
