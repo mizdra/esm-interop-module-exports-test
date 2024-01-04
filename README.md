@@ -1,12 +1,19 @@
 
-## Problem status
+## What's this?
 
-解決済み。
+This is a repository that describes the problem of missing named exports.
 
-## Problem details
-`module.exports = ` の右側に書く式によって、export される値が変わることの確認。
+## What is the problem?
 
-`{ default: { math: ..., string: ... }, math: ..., string: ... }` というオブジェクトが export されることを期待していて、ケース1では期待通りになるが、ケース2, 3 は期待通りにならない。
+Node.js allows us to import CJS from ESM with the import statement. The behavior is similar to importing ESM from ESM.
+
+The original CJS does not support named exports. Therefore, it is not possible to import named items from the original CJS. But, for convenience, Node.js parses the CJS code and provides the expected named exports. This mechanism is explained in the following document:
+
+- https://nodejs.org/api/esm.html#commonjs-namespaces
+
+However, named exports are detected statically by [cjs-module-lexer](https://github.com/mizdra/esm-interop-module-exports-test). Therefore, some cases that cannot be detected by cjs-module-lexer will be missing named exports.
+
+This repository introduces one such case.
 
 ```console
 
@@ -37,27 +44,3 @@ $ node src/main.js
   }
 }
 ```
-
-ちなみに `main.js` を CommonJS に書き直したバージョンでは、期待通りになる。
-
-```console
-$ node src/main.cjs
-{
-  math: { add: [Function: add], subtract: [Function: subtract] },
-  string: { join: [Function: join], capitalize: [Function: capitalize] }
-}
-{
-  math: { add: [Function: add], subtract: [Function: subtract] },
-  string: { join: [Function: join], capitalize: [Function: capitalize] }
-}
-{
-  math: { add: [Function: add], subtract: [Function: subtract] },
-  string: { join: [Function: join], capitalize: [Function: capitalize] }
-}
-```
-
-## Solution
-
-Node.js の仕様だということがわかりました。
-
-- https://twitter.com/mizdra/status/1742911589517516924
